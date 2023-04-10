@@ -9,6 +9,15 @@ const taskSchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
 });
 
+taskSchema.pre("save", async function (next) {
+  try {
+    const that = this;
+    next();
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 const Task = mongoose.model("Task", taskSchema);
 
 module.exports = Task;
